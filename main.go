@@ -1,11 +1,10 @@
 package main
 
 import (
-	"citizen_issue/database"
+	"citizen_issue/dbs"
 	_ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
-
-	database.ConnectDB()
+	dbs.ConnectDB()
 }
