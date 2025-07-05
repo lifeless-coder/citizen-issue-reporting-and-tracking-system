@@ -1,15 +1,11 @@
 package main
 
 import (
-	"fmt"
+	"citizen_issue/database"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
 
-	s := "gopher"
-	fmt.Println("Hello and welcome,go m %s!", s)
-
-	for i := 1; ; i++ {
-
-	}
+	database.ConnectDB()
 }
