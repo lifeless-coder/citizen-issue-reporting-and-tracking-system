@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2025 at 08:33 PM
+-- Generation Time: Jul 08, 2025 at 10:42 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -109,6 +109,7 @@ CREATE TABLE `post_reviews` (
 
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
   `nid` varchar(20) NOT NULL CHECK (`nid` regexp '^[0-9]+$'),
   `mobile_num` varchar(11) NOT NULL CHECK (`mobile_num` regexp '^[0-9]{11}$'),
   `user_password` varchar(255) NOT NULL,
