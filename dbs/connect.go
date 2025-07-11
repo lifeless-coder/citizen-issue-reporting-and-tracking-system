@@ -7,15 +7,24 @@ import (
 	"log"
 )
 
+var db *sql.DB
+
 func ConnectDB() {
-	db, err := sql.Open("mysql", "root:@tcp(localhost:3306)/citizen_issue")
+	var err error
+	db, err = sql.Open("mysql", "root:@tcp(localhost:3306)/citizen_issue")
 	if err != nil {
 		log.Fatal("Something went wrong:", err)
 	}
-	defer db.Close()
+
 	err = db.Ping()
 	if err != nil {
 		fmt.Println("error verifying connection with db.Ping")
 		panic(err.Error())
+	}
+
+}
+func CloseDB() {
+	if db != nil {
+		db.Close()
 	}
 }
