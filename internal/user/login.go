@@ -6,6 +6,15 @@ import (
 	"log"
 )
 
+func reInputPass(hashPass string) {
+	var input string
+	fmt.Scanln(&input)
+	if !dbs.ComparePass(hashPass, input) {
+		log.Println("wrong password")
+		reInputPass(hashPass)
+	}
+
+}
 func Login() {
 	var moblie string
 	var pass string
@@ -20,7 +29,9 @@ func Login() {
 		log.Fatal("userId not exist", err)
 	}
 	if !dbs.ComparePass(hashPass, pass) {
-		log.Fatal("wrong password", err)
+		log.Println("wrong password")
+		reInputPass(hashPass)
+
 	} else {
 		fmt.Println("login success")
 	}

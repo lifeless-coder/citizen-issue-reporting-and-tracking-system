@@ -83,7 +83,7 @@ func existNid(nid string) string {
 
 func Register() {
 	var u User
-	fmt.Scanf("%s", &u.usrname)
+	fmt.Scanln(&u.usrname)
 	fmt.Scanln(&u.nid)
 	u.nid = strings.TrimSpace(u.nid)
 	dupliNid, _ := dbs.IsNidExist(u.nid)
@@ -104,7 +104,8 @@ func Register() {
 	u.profession = strings.TrimSpace(u.profession)
 	fmt.Scanln(&u.birthday)
 	fmt.Scanln(&u.picture)
-	fmt.Scanln(&u.password)
+	fmt.Println("enter pass")
+	fmt.Scanf("%s", &u.password)
 	u.password = hashPass(u.password)
 
 	dbs.InsertIntoUser(u.usrname, u.nid, u.mobileNo, u.password, u.gender, u.profession, u.birthday, u.picture, u.email)
