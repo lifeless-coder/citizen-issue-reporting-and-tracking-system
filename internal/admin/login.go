@@ -6,18 +6,11 @@ import (
 	"log"
 )
 
-func reInputPass(hashPass string) {
-	var input string
-	fmt.Scanln(&input)
-	if !dbs.ComparePass(hashPass, input) {
-		log.Println("wrong password")
-		reInputPass(hashPass)
-	} else {
-		fmt.Println("login success")
-	}
+func reInputPass(hashPass string, id int) int {
 
+	return id
 }
-func (a *Admin) Login() {
+func (a *Admin) Login() int {
 	var err error
 	var hashPass string
 	fmt.Scanln(&a.email)
@@ -29,11 +22,23 @@ func (a *Admin) Login() {
 		log.Fatal("userId not exist", err)
 	}
 	if !dbs.ComparePass(hashPass, a.password) {
-		log.Println("wrong password")
-		reInputPass(hashPass)
+		log.Println("wrong password, try again")
+		for i := 0; i < 9; i++ {
+			var input string
+			fmt.Scanln(&input)
+			if !dbs.ComparePass(hashPass, input) {
+				log.Println("wrong password, try again")
+			} else {
+				fmt.Println("login success")
+				return userId
+			}
+		}
+		fmt.Println("try again later")
+		return 0
 
 	} else {
 		fmt.Println("login success")
+		return userId
 	}
-
+	return userId
 }

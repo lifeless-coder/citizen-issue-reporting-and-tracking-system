@@ -41,7 +41,7 @@ func existEmail() string {
 	var mail string
 	fmt.Scanln(&mail)
 	mail = isValidEmail(mail)
-	dupliMail, _ := dbs.IsNidExist(mail)
+	dupliMail, _ := dbs.IsAdminMailExist(mail)
 	if dupliMail {
 		log.Println("email exist enter again")
 		return existEmail()
