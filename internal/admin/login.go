@@ -1,4 +1,4 @@
-package user
+package admin
 
 import (
 	"citizen_issue/dbs"
@@ -17,20 +17,18 @@ func reInputPass(hashPass string) {
 	}
 
 }
-func Login() {
-	var moblie string
-	var pass string
-	var hashPass string
+func (a *Admin) Login() {
 	var err error
-	fmt.Scanln(&moblie)
-	fmt.Scanln(&pass)
-	exstMob, userId := dbs.IsNumberExist(moblie)
+	var hashPass string
+	fmt.Scanln(&a.email)
+	fmt.Scanln(&a.password)
+	exstMob, userId := dbs.IsAdminMailExist(a.email)
 	if exstMob {
-		hashPass, err = dbs.GetPassword(userId)
+		hashPass, err = dbs.GetAdminPassword(userId)
 	} else {
 		log.Fatal("userId not exist", err)
 	}
-	if !dbs.ComparePass(hashPass, pass) {
+	if !dbs.ComparePass(hashPass, a.password) {
 		log.Println("wrong password")
 		reInputPass(hashPass)
 

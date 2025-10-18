@@ -79,7 +79,7 @@ func existNid(nid string) string {
 	return nid
 }
 
-//mobile nid already exist kina check korte hobe
+//email exist kore kina check korte hobe
 
 func Register() {
 	var u User
