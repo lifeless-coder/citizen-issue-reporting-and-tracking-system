@@ -11,15 +11,15 @@ import (
 )
 
 type User struct {
-	usrname    string
-	nid        string
-	mobileNo   string
-	email      string
-	gender     string
-	profession string
-	birthday   string
-	picture    string
-	password   string
+	usrname    string `json: "username"`
+	nid        string `json: "nid"`
+	mobileNo   string `json: "mobile_no"`
+	email      string `json: "user_email"`
+	gender     string `json: "gender"`
+	profession string `json: "profession"`
+	birthday   string `json: "birthday"`
+	picture    string `json: "picture"`
+	password   string `json: "password"`
 }
 
 func isValidNum(mb string) string { //return valid number
