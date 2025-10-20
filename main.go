@@ -12,6 +12,7 @@ func main() {
 	user.UserMain()
 	defer dbs.CloseDB()
 	r := mux.NewRouter()
-	r.HandleFunc().Methods("GET")
+	lg := &user.Loginreq{}
+	r.HandleFunc("user/login", lg.Login).Methods("GET")
 
 }
