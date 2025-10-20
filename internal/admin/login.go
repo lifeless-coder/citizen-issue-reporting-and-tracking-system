@@ -2,37 +2,31 @@ package admin
 
 import (
 	"citizen_issue/dbs"
+	"encoding/json"
 	"fmt"
 	"log"
+	"net/http"
 )
 
-func reInputPass(hashPass string, id int) int {
-
-	return id
+type LoginReq struct {
+	email string `json:"email"`
+	pass  string `json:"password"`
 }
-func (a *Admin) Login() int {
+
+func (a *LoginReq) Login(w http.ResponseWriter, r *http.Request) int {
+	w.Header().Set("Content-Type", "application/json")
 	var err error
 	var hashPass string
-	fmt.Scanln(&a.email)
-	fmt.Scanln(&a.password)
+	err = json.NewDecoder(r.Body).Decode(&a)
 	exstMob, userId := dbs.IsAdminMailExist(a.email)
 	if exstMob {
 		hashPass, err = dbs.GetAdminPassword(userId)
 	} else {
 		log.Fatal("userId not exist", err)
 	}
-	if !dbs.ComparePass(hashPass, a.password) {
+	if !dbs.ComparePass(hashPass, a.pass) {
 		log.Println("wrong password, try again")
-		for i := 0; i < 9; i++ {
-			var input string
-			fmt.Scanln(&input)
-			if !dbs.ComparePass(hashPass, input) {
-				log.Println("wrong password, try again")
-			} else {
-				fmt.Println("login success")
-				return userId
-			}
-		}
+		a.Login(w, r)
 		fmt.Println("try again later")
 		return 0
 
